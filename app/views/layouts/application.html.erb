@@ -8,6 +8,7 @@
       <%= render "shared/flash_notice" %>
       <%= render "shared/navbar" %>
     </header>
+    <%= image_tag "logo.png", alt: "Logo" %>
 
     <main class="flex-grow">
       <%= content_for?(:content) ? yield(:content) : yield %>

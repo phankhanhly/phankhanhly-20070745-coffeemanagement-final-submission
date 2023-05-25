@@ -1,0 +1,29 @@
+<div class="max-w-3xl mx-auto px-4">
+  <div class="flex items-center justify-between">
+    <h1 class="flex-1 font-bold text-3xl">Coffee_shop</h1>
+
+    <div class="flex-wrap lg:flex items-center lg:space-x-3">
+      <%= link_to coffee_shops_path, class: button_class(theme: "transparent") do %>
+      All Coffee_shops
+      <% end %>
+      <%= link_to edit_coffee_shop_path(@coffee_shop), class: button_class(theme:"primary") do %>
+      Edit
+      <% end %>
+    </div>
+  </div>
+
+  <ul class="text-slate-700">
+      <li>
+        <p class="font-semibold">Name:</p>
+        <p><%= @coffee_shop.name %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Address:</p>
+        <p><%= @coffee_shop.address %></p>
+      </li>
+      <li>
+        <p class="font-semibold">Phone:</p>
+        <p><%= @coffee_shop.phone %></p>
+      </li>
+  </ul>
+</div>
