@@ -23,7 +23,10 @@
         <%= form.label :payment_method, class: label_class %>
           <%= form.text_field :payment_method, class: input_class %>
       </div>
-      <%= form.select :order_id, options_from_collection_for_select(Order.all, :id, :id), include_blank: true %>
+      <%= form.select :order_id, options_from_collection_for_select(Order.all, :id, :order_number, selected: payment.order_id), include_blank: true %>
+
+
+
 <%= form.submit class: button_class(theme: 'primary') %>
 
 <% if payment.persisted? %>

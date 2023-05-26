@@ -3,5 +3,5 @@ class Order < ApplicationRecord
     has_and_belongs_to_many :ingredients, join_table: 'orders_ingredients'
     has_and_belongs_to_many :customers
     has_one :payment
-    validates :order_date, presence: true
+    validates :order_number, presence: true
 end

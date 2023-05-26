@@ -2,13 +2,14 @@
 <html class="h-full antialiased">
   <%= render "shared/head" %>
 
-  <body class="font-sans font-normal leading-normal text-gray-800 bg-white flex flex-col min-h-screen ">
-
+  <body class="font-sans font-normal leading-normal text-gray-800 bg-custom-color flex flex-col min-h-screen">
     <header>
       <%= render "shared/flash_notice" %>
       <%= render "shared/navbar" %>
     </header>
-    <%= image_tag "logo.png", alt: "Logo" %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+
 
     <main class="flex-grow">
       <%= content_for?(:content) ? yield(:content) : yield %>

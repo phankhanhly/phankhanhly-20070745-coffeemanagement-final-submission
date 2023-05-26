@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_26_151201) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -65,12 +65,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers_orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.integer "customer_id", null: false
+    t.index ["customer_id"], name: "index_customers_orders_on_customer_id"
+    t.index ["order_id"], name: "index_customers_orders_on_order_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "coffee_shop_id", null: false
+    t.index ["coffee_shop_id"], name: "index_employees_on_coffee_shop_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -93,6 +104,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ingredients_orders", force: :cascade do |t|
+    t.integer "ingredient_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_ingredients_orders_on_ingredient_id"
+    t.index ["order_id"], name: "index_ingredients_orders_on_order_id"
+  end
+
   create_table "menus", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -107,6 +127,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "coffee_shop_id", null: false
+    t.string "order_number"
+    t.index ["coffee_shop_id"], name: "index_orders_on_coffee_shop_id"
+  end
+
+  create_table "orders_ingredients", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "ingredient_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_orders_ingredients_on_ingredient_id"
+    t.index ["order_id"], name: "index_orders_ingredients_on_order_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -115,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
     t.string "payment_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -134,4 +168,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_035135) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers_orders", "customers"
+  add_foreign_key "customers_orders", "orders"
+  add_foreign_key "employees", "coffee_shops"
+  add_foreign_key "ingredients_orders", "ingredients"
+  add_foreign_key "ingredients_orders", "orders"
+  add_foreign_key "orders", "coffee_shops"
+  add_foreign_key "orders_ingredients", "ingredients"
+  add_foreign_key "orders_ingredients", "orders"
 end

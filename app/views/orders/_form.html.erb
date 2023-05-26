@@ -10,7 +10,10 @@
   </ul>
 </div>
 <% end %>
-
+  <div class="mb-6">
+        <%= form.label :order_number, class: label_class %>
+        <%= form.number_field :order_number, class: input_class %>
+      </div>
   <div class="mb-6">
         <%= form.label :order_date, class: label_class %>
           <%= form.date_field :order_date, class: input_class %>
@@ -24,7 +27,7 @@
           <%= form.text_area :note, class: input_class %>
       </div>
       <%= form.select :coffee_shop_id, options_from_collection_for_select(CoffeeShop.all, :id, :name), include_blank: true %>
-      <%= form.collection_select :ingredient_ids, Ingredient.all, :id, :name, {}, multiple: true, name: 'order[ingredient_ids][]' %>
+      <%= form.collection_select :menu_ids, Menu.all, :id, :name, multiple: true, name: 'order[menu_ids][]', include_blank: true %>
       <%= form.collection_select :customer_id, Customer.all, :id, :name, include_blank: true %>
       
 <%= form.submit class: button_class(theme: 'primary') %>
